@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Container(
                   height: 60,
-                  width: 140,
+                  width: 165,
                   padding: EdgeInsets.fromLTRB(10, 14, 10, 0),
                   child: ElevatedButton(
                     child: Text(
