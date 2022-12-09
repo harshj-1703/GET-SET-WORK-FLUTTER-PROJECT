@@ -300,6 +300,25 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
                     addWorkingProfile();
                   },
                 )),
+            Container(
+                height: 70,
+                width: 250,
+                padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
+                child: ElevatedButton(
+                  child: Text(
+                    'Remove Working Profile',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Times New Roman',
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 255, 2, 2)),
+                  onPressed: () {
+                    removeWorkingProfile();
+                  },
+                )),
           ],
         ),
       ),
@@ -338,11 +357,7 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
         await addUserWorkingProfile.set(json);
         showSnackBar('User Working Profile Added');
       } else {
-        final userDetailsGet1 = await FirebaseFirestore.instance
-            .collection('workingProfiles')
-            .where('userId', isEqualTo: UserDashboard.userId)
-            .get();
-        final updateId = userDetailsGet1.docs.first.id;
+        final updateId = countUsersSnap.docs.first.id;
         final updateUserWorkingProfile = FirebaseFirestore.instance
             .collection('workingProfiles')
             .doc(updateId);
@@ -358,6 +373,25 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
         await updateUserWorkingProfile.update(json);
         showSnackBar('User Working Profile Updated');
       }
+    }
+  }
+
+  removeWorkingProfile() async {
+    final QuerySnapshot countUsersSnap = await FirebaseFirestore.instance
+        .collection('workingProfiles')
+        .where('userId', isEqualTo: UserDashboard.userId)
+        .get();
+    final int countUsers = countUsersSnap.docs.length;
+    // print(countUsers);
+    if (countUsers == 0) {
+      showSnackBar('Please Add Working Profile First');
+    } else {
+      final String getId = countUsersSnap.docs.first.id;
+      await FirebaseFirestore.instance
+          .collection('workingProfiles')
+          .doc(getId)
+          .delete();
+      showSnackBar('Working Profile Removed Successfully');
     }
   }
 

@@ -166,14 +166,20 @@ class _UpdateProfilePhotoState extends State<UpdateProfilePhoto> {
                             height: 200,
                             width: 200,
                           )
-                        : CachedNetworkImage(
-                            imageUrl: UserDashboard.userPhoto,
-                            height: 200,
-                            width: 200,
-                            placeholder: (context, url) =>
-                                CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                        : CircleAvatar(
+                            radius: 100,
+                            child: ClipOval(
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: UserDashboard.userPhoto,
+                                height: 200,
+                                width: 200,
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                            ),
                           ),
                   )),
             ),

@@ -56,7 +56,7 @@ class _AddJobState extends State<AddJob> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 30, 0, 15),
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
               child: Text(
                 'ADD WORK',
                 style: TextStyle(
@@ -66,7 +66,7 @@ class _AddJobState extends State<AddJob> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+              padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: TextField(
                   keyboardType: TextInputType.text,
                   maxLength: 50,
@@ -228,6 +228,25 @@ class _AddJobState extends State<AddJob> {
                     addWork();
                   },
                 )),
+            Container(
+                height: 50,
+                width: 180,
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: ElevatedButton(
+                  child: Text(
+                    'Remove Work',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Times New Roman',
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 255, 2, 2)),
+                  onPressed: () {
+                    removeWork();
+                  },
+                )),
           ],
         ),
       ),
@@ -265,11 +284,7 @@ class _AddJobState extends State<AddJob> {
         await addUserWorkingProfile.set(json);
         showSnackBar('Work Added');
       } else {
-        final userDetailsGet1 = await FirebaseFirestore.instance
-            .collection('works')
-            .where('userId', isEqualTo: UserDashboard.userId)
-            .get();
-        final updateId = userDetailsGet1.docs.first.id;
+        final updateId = countUsersSnap.docs.first.id;
         final updateUserWorkingProfile =
             FirebaseFirestore.instance.collection('works').doc(updateId);
         final json = {
@@ -283,6 +298,22 @@ class _AddJobState extends State<AddJob> {
         await updateUserWorkingProfile.update(json);
         showSnackBar('Work Profile Updated');
       }
+    }
+  }
+
+  removeWork() async {
+    final QuerySnapshot countUsersSnap = await FirebaseFirestore.instance
+        .collection('works')
+        .where('userId', isEqualTo: UserDashboard.userId)
+        .get();
+    final int countUsers = countUsersSnap.docs.length;
+    // print(countUsers);
+    if (countUsers == 0) {
+      showSnackBar('Please Add Work First');
+    } else {
+      final String getId = countUsersSnap.docs.first.id;
+      await FirebaseFirestore.instance.collection('works').doc(getId).delete();
+      showSnackBar('Work Removed Successfully');
     }
   }
 

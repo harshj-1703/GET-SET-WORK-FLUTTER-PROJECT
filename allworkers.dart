@@ -70,9 +70,13 @@ class _AllWorkersState extends State<AllWorkers> {
             leading: CircleAvatar(
               radius: 25,
               backgroundColor: Colors.transparent,
-              child: SizedBox(
+              child: CircleAvatar(
+                radius: 100,
                 child: ClipOval(
                   child: CachedNetworkImage(
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
                     imageUrl: worker.userProfile,
                     placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),

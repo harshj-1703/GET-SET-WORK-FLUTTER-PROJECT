@@ -114,9 +114,13 @@ class _UserDashboardState extends State<UserDashboard> {
             leading: CircleAvatar(
               radius: 25,
               backgroundColor: Color.fromARGB(0, 219, 0, 0),
-              child: SizedBox(
+              child: CircleAvatar(
+                radius: 100,
                 child: ClipOval(
                   child: CachedNetworkImage(
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
                     imageUrl: job.userProfile,
                     placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
