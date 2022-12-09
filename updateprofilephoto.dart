@@ -154,6 +154,17 @@ class _UpdateProfilePhotoState extends State<UpdateProfilePhoto> {
             //     ),
             //   ),
             // ),
+
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Text(
+                'EDIT PHOTO',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 14, 0, 206),
+                    fontFamily: 'Quantum',
+                    fontSize: 25),
+              ),
+            ),
             Center(
               child: Padding(
                   padding: EdgeInsets.fromLTRB(5, 20, 5, 5),

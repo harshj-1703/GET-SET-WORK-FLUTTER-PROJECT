@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_set_work/dashboard.dart';
@@ -15,6 +16,10 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
+
+AudioPlayer audioPlayer = AudioPlayer();
+String audioPath = "music/1.mp3";
+String noAudioPath = "music/2.mp3";
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneNumber = TextEditingController();
@@ -215,6 +220,8 @@ class _LoginScreenState extends State<LoginScreen> {
             pref.setString('userId', userId);
             pref.setBool('userSet', true);
             print(LoginScreen.LoginId);
+
+            await audioPlayer.play(AssetSource(audioPath));
             showSnackBar('Login Successfully');
             Navigator.pushAndRemoveUntil(
                 context,

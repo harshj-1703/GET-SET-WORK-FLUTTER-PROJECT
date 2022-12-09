@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,10 @@ class RegisterMobile extends StatefulWidget {
   @override
   State<RegisterMobile> createState() => _RegisterMobileState();
 }
+
+AudioPlayer audioPlayer = AudioPlayer();
+String audioPath = "music/1.mp3";
+String noAudioPath = "music/2.mp3";
 
 class _RegisterMobileState extends State<RegisterMobile> {
   TextEditingController phoneNumber = TextEditingController();
@@ -787,5 +792,18 @@ class _UserProfilePhotoState extends State<UserProfilePhoto> {
         MaterialPageRoute(builder: (context) => LoginScreen()),
         // ModalRoute.withName("/MainScreen")
         ((route) => false));
+
+    await audioPlayer.play(AssetSource(audioPath));
+    showSnackBar('User Created Successfully!');
+  }
+
+  showSnackBar(String message) {
+    var SnackBarVariable = SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.deepOrange,
+        behavior: SnackBarBehavior.floating,
+        width: 300,
+        duration: Duration(seconds: 2));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBarVariable);
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get_set_work/addjob.dart';
@@ -7,6 +8,7 @@ import 'package:get_set_work/addworkingprofile.dart';
 import 'package:get_set_work/allworkers.dart';
 import 'package:get_set_work/dashboard.dart';
 import 'package:get_set_work/editprofile.dart';
+import 'package:get_set_work/settings.dart';
 import 'package:get_set_work/updateprofilephoto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,6 +16,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'login.dart';
 
 class NavBar extends StatelessWidget {
+  AudioPlayer audioPlayer = AudioPlayer();
+  String audioPath = "music/1.mp3";
+  String noAudioPath = "music/2.mp3";
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -188,7 +193,14 @@ class NavBar extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text('Settings'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Settings(),
+                  ),
+                  (route) => route.isFirst);
+            },
           ),
           Divider(),
           ListTile(
@@ -235,6 +247,7 @@ class NavBar extends StatelessWidget {
 
   LogOut() async {
     var pref = await SharedPreferences.getInstance();
+    await audioPlayer.play(AssetSource(noAudioPath));
     pref.setBool('userSet', false);
   }
 }

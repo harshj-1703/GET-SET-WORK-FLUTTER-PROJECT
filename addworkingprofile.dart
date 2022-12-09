@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_set_work/dashboard.dart';
 import 'navbar.dart';
 import 'package:intl/intl.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 List<String> workBasis = <String>[
   'Hourly Charges',
@@ -71,6 +72,9 @@ var buttonName = 'Add Profile';
 // }
 
 class _AddWorkingProfileState extends State<AddWorkingProfile> {
+  AudioPlayer audioPlayer = AudioPlayer();
+  String audioPath = "music/1.mp3";
+  String noAudioPath = "music/2.mp3";
   @override
   void initState() {
     // getValues();
@@ -331,6 +335,7 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
         workType.text.isEmpty ||
         money.text.isEmpty ||
         dateInput.text.isEmpty) {
+      await audioPlayer.play(AssetSource(noAudioPath));
       showSnackBar('Please Fill All Fields');
     } else {
       final QuerySnapshot countUsersSnap = await FirebaseFirestore.instance
@@ -355,6 +360,7 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
           'createdAt': DateTime.now()
         };
         await addUserWorkingProfile.set(json);
+        await audioPlayer.play(AssetSource(audioPath));
         showSnackBar('User Working Profile Added');
       } else {
         final updateId = countUsersSnap.docs.first.id;
@@ -371,6 +377,7 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
           'createdAt': DateTime.now()
         };
         await updateUserWorkingProfile.update(json);
+        await audioPlayer.play(AssetSource(audioPath));
         showSnackBar('User Working Profile Updated');
       }
     }
@@ -391,6 +398,7 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
           .collection('workingProfiles')
           .doc(getId)
           .delete();
+      await audioPlayer.play(AssetSource(noAudioPath));
       showSnackBar('Working Profile Removed Successfully');
     }
   }

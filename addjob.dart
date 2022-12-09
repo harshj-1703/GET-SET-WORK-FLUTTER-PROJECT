@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dashboard.dart';
 import 'navbar.dart';
 import 'package:intl/intl.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 List<String> workBasis = <String>[
   'Hourly Charges',
@@ -25,6 +26,9 @@ class _AddJobState extends State<AddJob> {
   TextEditingController address = TextEditingController();
   TextEditingController money = TextEditingController();
   TextEditingController work = TextEditingController();
+  AudioPlayer audioPlayer = AudioPlayer();
+  String audioPath = "music/1.mp3";
+  String noAudioPath = "music/2.mp3";
 
   @override
   void initState() {
@@ -258,6 +262,7 @@ class _AddJobState extends State<AddJob> {
         companyName.text.isEmpty ||
         work.text.isEmpty ||
         money.text.isEmpty) {
+      await audioPlayer.play(AssetSource(noAudioPath));
       showSnackBar('Please Fill All Fields');
     } else {
       final QuerySnapshot countUsersSnap = await FirebaseFirestore.instance
@@ -282,6 +287,8 @@ class _AddJobState extends State<AddJob> {
         };
         // print(json);
         await addUserWorkingProfile.set(json);
+
+        await audioPlayer.play(AssetSource(audioPath));
         showSnackBar('Work Added');
       } else {
         final updateId = countUsersSnap.docs.first.id;
@@ -296,6 +303,8 @@ class _AddJobState extends State<AddJob> {
           'createdAt': DateTime.now()
         };
         await updateUserWorkingProfile.update(json);
+
+        await audioPlayer.play(AssetSource(audioPath));
         showSnackBar('Work Profile Updated');
       }
     }
@@ -313,6 +322,8 @@ class _AddJobState extends State<AddJob> {
     } else {
       final String getId = countUsersSnap.docs.first.id;
       await FirebaseFirestore.instance.collection('works').doc(getId).delete();
+
+      await audioPlayer.play(AssetSource(noAudioPath));
       showSnackBar('Work Removed Successfully');
     }
   }

@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StartScreen(); //return to statefullwidget of MyScreen class
   }
+
+  static of(BuildContext context) {}
 }
 
 //shortcut for stateless is stf

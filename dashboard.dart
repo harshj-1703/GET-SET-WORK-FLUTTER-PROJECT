@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_set_work/alljobsmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,8 +33,50 @@ class _UserDashboardState extends State<UserDashboard> {
   @override
   void initState() {
     // TODO: implement initState
+    checkInternet();
     getUserDetails();
+
     super.initState();
+  }
+
+  checkInternet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        // print('connected');
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      Future<void> _showMyDialog() async {
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('No Internet Connection'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: const <Widget>[
+                    Text('Please Connect To The Internet!'),
+                    // Text('Would you like to approve of this message?'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    SystemNavigator.pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+
+      _showMyDialog();
+    }
   }
 
   @override
