@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_set_work/alljobsmodel.dart';
@@ -12,6 +13,11 @@ class UserDashboard extends StatefulWidget {
   static String userPhoto = '';
   static String userName = '';
   static String userMobile = '';
+  static String userEmail = '';
+  static String userPassword = '';
+  static String userState = '';
+  static String userCity = '';
+  static String userCountry = '';
   // static String createdAt = '';
 
   const UserDashboard({super.key});
@@ -85,6 +91,11 @@ class _UserDashboardState extends State<UserDashboard> {
       UserDashboard.userName = data?['name'];
       UserDashboard.userMobile = data?['mobile'];
       UserDashboard.userPhoto = data?['profilePhoto'];
+      UserDashboard.userEmail = data?['email'];
+      UserDashboard.userPassword = data?['password'];
+      UserDashboard.userState = data?['state'];
+      UserDashboard.userCity = data?['city'];
+      UserDashboard.userCountry = data?['country'];
       // UserDashboard.createdAt = data?['createdAt'].toString();
     });
   }
@@ -103,8 +114,14 @@ class _UserDashboardState extends State<UserDashboard> {
             leading: CircleAvatar(
               radius: 25,
               backgroundColor: Color.fromARGB(0, 219, 0, 0),
-              backgroundImage: NetworkImage(
-                job.userProfile,
+              child: SizedBox(
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    imageUrl: job.userProfile,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                ),
               ),
             ),
             title: Text(

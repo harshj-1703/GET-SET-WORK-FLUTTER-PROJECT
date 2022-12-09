@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get_set_work/addjob.dart';
 import 'package:get_set_work/addworkingprofile.dart';
 import 'package:get_set_work/allworkers.dart';
 import 'package:get_set_work/dashboard.dart';
+import 'package:get_set_work/editprofile.dart';
+import 'package:get_set_work/updateprofilephoto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,7 +41,12 @@ class NavBar extends StatelessWidget {
               otherAccountsPictures: [
                 IconButton(
                     onPressed: () {
-                      print('edit');
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditProfile()),
+                          // ModalRoute.withName("/MainScreen")
+                          ((route) => route.isFirst));
                     },
                     icon: Icon(
                       Icons.edit,
@@ -46,13 +54,27 @@ class NavBar extends StatelessWidget {
                       color: Colors.black,
                     ))
               ],
-              currentAccountPicture: CircleAvatar(
-                child: ClipOval(
-                  child: Image.network(
-                    UserDashboard.userPhoto,
-                    fit: BoxFit.cover,
-                    width: 100,
-                    height: 100,
+              currentAccountPicture: IconButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UpdateProfilePhoto()),
+                      // ModalRoute.withName("/MainScreen")
+                      ((route) => route.isFirst));
+                },
+                icon: CircleAvatar(
+                  radius: 200,
+                  child: ClipOval(
+                    child: CachedNetworkImage(
+                      imageUrl: UserDashboard.userPhoto,
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      fit: BoxFit.cover,
+                      width: 100,
+                      height: 100,
+                    ),
                   ),
                 ),
               ),
@@ -166,7 +188,7 @@ class NavBar extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text('Settings'),
-            onTap: () => null,
+            onTap: () {},
           ),
           Divider(),
           ListTile(

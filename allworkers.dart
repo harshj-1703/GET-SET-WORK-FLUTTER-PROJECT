@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_set_work/allworkersmodel.dart';
@@ -71,7 +72,11 @@ class _AllWorkersState extends State<AllWorkers> {
               backgroundColor: Colors.transparent,
               child: SizedBox(
                 child: ClipOval(
-                  child: Image.network(worker.userProfile),
+                  child: CachedNetworkImage(
+                    imageUrl: worker.userProfile,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
               ),
             ),

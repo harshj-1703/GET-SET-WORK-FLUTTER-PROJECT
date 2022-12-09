@@ -6,6 +6,8 @@ import 'package:get_set_work/dashboard.dart';
 import 'package:get_set_work/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'forgotpassword.dart';
+
 class LoginScreen extends StatefulWidget {
   static String LoginId = '';
   LoginScreen({super.key});
@@ -151,6 +153,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                 ],
               ),
+              TextButton(
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForgotPassword1()),
+                  );
+                },
+              )
             ],
           ),
         ));

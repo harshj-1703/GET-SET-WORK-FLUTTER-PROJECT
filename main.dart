@@ -1,8 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart'; //importing packages in flutter
-import 'package:get_set_work/dashboard.dart';
-import 'package:get_set_work/login.dart';
-import 'package:get_set_work/register.dart';
 import 'package:get_set_work/startscreen.dart';
 
 void main() async {
