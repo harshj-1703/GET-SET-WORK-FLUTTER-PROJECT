@@ -25,7 +25,7 @@ class _AllWorkersState extends State<AllWorkers> {
           'ALL WORKERS',
           style: TextStyle(
             color: Color.fromARGB(255, 0, 25, 116),
-            fontSize: 28,
+            fontSize: 24,
             fontFamily: 'Quantum',
             letterSpacing: 1,
           ),
@@ -89,27 +89,23 @@ class _AllWorkersState extends State<AllWorkers> {
                 Divider(
                   color: Colors.greenAccent,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Work: ',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 17, 0, 0),
-                          fontFamily: 'Times New Roman',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1),
-                    ),
-                    Text(
-                      "${worker.workType}",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 173, 75, 0),
-                          fontFamily: 'Times New Roman',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ],
+                Text(
+                  'Work: ',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 17, 0, 0),
+                      fontFamily: 'Times New Roman',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1),
+                ),
+                Text(
+                  "${worker.workType}",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 173, 75, 0),
+                      fontFamily: 'Times New Roman',
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1),
                 ),
                 Divider(
                   color: Colors.greenAccent,

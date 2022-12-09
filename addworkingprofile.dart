@@ -94,7 +94,7 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
           'GET SET WORK',
           style: TextStyle(
             color: Color.fromARGB(255, 0, 25, 116),
-            fontSize: 28,
+            fontSize: 25,
             fontFamily: 'Quantum',
             letterSpacing: 1,
           ),
@@ -111,7 +111,7 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
                 style: TextStyle(
                     color: Color.fromARGB(255, 14, 0, 206),
                     fontFamily: 'Quantum',
-                    fontSize: 25),
+                    fontSize: 22),
               ),
             ),
             Container(
@@ -142,11 +142,12 @@ class _AddWorkingProfileState extends State<AddWorkingProfile> {
                   )),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                   child: Text(
-                    'Work Charges Type : ',
+                    'Charges Type : ',
                     style: TextStyle(
                         color: Color.fromARGB(255, 0, 8, 71),
                         fontSize: 16,

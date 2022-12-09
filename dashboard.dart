@@ -41,7 +41,7 @@ class _UserDashboardState extends State<UserDashboard> {
           'ALL JOBS',
           style: TextStyle(
             color: Color.fromARGB(255, 0, 25, 116),
-            fontSize: 28,
+            fontSize: 24,
             fontFamily: 'Quantum',
             letterSpacing: 1,
           ),
@@ -102,11 +102,9 @@ class _UserDashboardState extends State<UserDashboard> {
           child: ListTile(
             leading: CircleAvatar(
               radius: 25,
-              backgroundColor: Colors.transparent,
-              child: SizedBox(
-                child: ClipOval(
-                  child: Image.network(job.userProfile),
-                ),
+              backgroundColor: Color.fromARGB(0, 219, 0, 0),
+              backgroundImage: NetworkImage(
+                job.userProfile,
               ),
             ),
             title: Text(
@@ -123,27 +121,23 @@ class _UserDashboardState extends State<UserDashboard> {
                 Divider(
                   color: Colors.greenAccent,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Work: ',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 17, 0, 0),
-                          fontFamily: 'Times New Roman',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1),
-                    ),
-                    Text(
-                      "${job.work}",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 173, 75, 0),
-                          fontFamily: 'Times New Roman',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ],
+                Text(
+                  'Work: ',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 17, 0, 0),
+                      fontFamily: 'Times New Roman',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1),
+                ),
+                Text(
+                  "${job.work}",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 173, 75, 0),
+                      fontFamily: 'Times New Roman',
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1),
                 ),
                 Divider(
                   color: Colors.greenAccent,
@@ -163,27 +157,23 @@ class _UserDashboardState extends State<UserDashboard> {
                 Divider(
                   color: Colors.greenAccent,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Address : ',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 17, 0, 0),
-                          fontFamily: 'Times New Roman',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1),
-                    ),
-                    Text(
-                      '${job.workAddress}',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 243, 13, 170),
-                          fontFamily: 'Times New Roman',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ],
+                Text(
+                  'Address : ',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 17, 0, 0),
+                      fontFamily: 'Times New Roman',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1),
+                ),
+                Text(
+                  '${job.workAddress}',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 243, 13, 170),
+                      fontFamily: 'Times New Roman',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1),
                 )
               ],
             ),

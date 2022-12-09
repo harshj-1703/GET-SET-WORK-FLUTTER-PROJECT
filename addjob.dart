@@ -45,7 +45,7 @@ class _AddJobState extends State<AddJob> {
           'GET SET WORK',
           style: TextStyle(
             color: Color.fromARGB(255, 0, 25, 116),
-            fontSize: 28,
+            fontSize: 24,
             fontFamily: 'Quantum',
             letterSpacing: 1,
           ),
@@ -147,11 +147,13 @@ class _AddJobState extends State<AddJob> {
                   )),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
                   padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                   child: Text(
-                    'Work Charges Type : ',
+                    'Charges Type : ',
                     style: TextStyle(
                         color: Color.fromARGB(255, 0, 8, 71),
                         fontSize: 16,
