@@ -11,6 +11,7 @@ import 'forgotpassword.dart';
 
 class LoginScreen extends StatefulWidget {
   static String LoginId = '';
+  static String UserType = '0';
   LoginScreen({super.key});
 
   @override
@@ -214,7 +215,16 @@ class _LoginScreenState extends State<LoginScreen> {
               .get();
           var getPassword = getUserDetails.docs.last.get('password');
           var userId = getUserDetails.docs.last.id;
+          var docSnapshot = await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(userId)
+              .get();
+          Map<String, dynamic>? data = docSnapshot.data();
           if (password.text == getPassword) {
+            // print(data?['name']);
+            if (data?['userType'] == '1') {
+              LoginScreen.UserType = '1';
+            }
             LoginScreen.LoginId = userId;
             var pref = await SharedPreferences.getInstance();
             pref.setString('userId', userId);

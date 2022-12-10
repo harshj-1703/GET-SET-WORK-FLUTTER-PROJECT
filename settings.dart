@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:get_set_work/addworkingprofile.dart';
 import 'navbar.dart';
 
 // List<String> languages = <String>['English', 'Gujarati', 'Hindi'];
@@ -10,10 +9,10 @@ class Settings extends StatefulWidget {
   const Settings({super.key});
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<Settings> createState() => _SettingsState1();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState1 extends State<Settings> {
   // String dropdownLan = languages.first;
   @override
   Widget build(BuildContext context) {

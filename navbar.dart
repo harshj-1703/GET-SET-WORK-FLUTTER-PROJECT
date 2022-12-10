@@ -9,6 +9,7 @@ import 'package:get_set_work/allworkers.dart';
 import 'package:get_set_work/dashboard.dart';
 import 'package:get_set_work/editprofile.dart';
 import 'package:get_set_work/settings.dart';
+import 'package:get_set_work/settingsAdmin.dart';
 import 'package:get_set_work/updateprofilephoto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -194,12 +195,21 @@ class NavBar extends StatelessWidget {
             ),
             title: Text('Settings'),
             onTap: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Settings(),
-                  ),
-                  (route) => route.isFirst);
+              if (LoginScreen.UserType == '1') {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SettingsAdmin(),
+                    ),
+                    (route) => route.isFirst);
+              } else {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Settings(),
+                    ),
+                    (route) => route.isFirst);
+              }
             },
           ),
           Divider(),
